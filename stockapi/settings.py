@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'django_postgres_dropdb',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

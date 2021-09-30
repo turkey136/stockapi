@@ -1,10 +1,10 @@
-from django.http import HttpResponse
-import json
+from django.http import HttpResponse, JsonResponse
+from stock.models import Stock
+from stock.serializers import StockSerializer
 
 
 def index(request):
-    di = {"xxx":"123","yyy":"456"}
-    return HttpResponse(
-      json.dumps(di),
-      headers={'Content-Type': 'application/json; charset=UTF-8'}
-    )
+    stocks = Stock.objects.all()
+    serializer = StockSerializer(stocks, many=True)
+    return JsonResponse(serializer.data, safe=False)
+    

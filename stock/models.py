@@ -20,6 +20,8 @@ class Stock(models.Model):
   url = models.TextField(max_length=200)
   updated_at = models.DateTimeField(auto_now=True)
 
+  
+
 class DailyStock(models.Model):
   stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
   date = models.DateField(db_index=True)
