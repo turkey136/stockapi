@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+
+env = environ.Env()
+env.read_env('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_ag^f!zw*pe5=n%n*$grc+921mfwa&d)!vid_t7um5#i%dc+73'
+SECRET_KEY = env.get_value('SECRET_KEY', cast=str, default='')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,11 +84,11 @@ WSGI_APPLICATION = 'stockapi.wsgi.application'
 DATABASES = {
   'default': {
       'ENGINE': 'django.db.backends.postgresql',
-      'NAME': 'postgres',
-      'USER': 'postgres',
-      'HOST': 'stockdb',
-      'PASSWORD': 'postgres',
-      'PORT': 5432,
+      'NAME': env.get_value('DB_NAME', cast=str, default=''),
+      'USER': env.get_value('DB_USER', cast=str, default=''),
+      'HOST': env.get_value('DB_HOST', cast=str, default=''),
+      'PASSWORD': env.get_value('DB_PASSWORD', cast=str, default=''),
+      'PORT': env.get_value('DB_PORT', cast=int, default=5432),
   }
 }
 

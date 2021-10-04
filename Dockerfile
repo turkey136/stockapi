@@ -9,5 +9,6 @@ RUN pip install pandas-datareader \
                 django-extensions \
                 Werkzeug \
                 django-postgres-dropdb \
-                djangorestframework
+                djangorestframework \
+                django-environ
 COPY . /code/
