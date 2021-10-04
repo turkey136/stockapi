@@ -1,7 +1,7 @@
 import csv
 import os
 from stock.models import Market, Sector, Stock
-# dc run stockapi python3 manage.py runscript seed
+# dc run --rm stockapi python3 manage.py runscript seed
 
 def run():
  # csv: https://nonbiri-reinvest.net/wp-content/uploads/2016/08/nyse_nasdaq_amex_stocklist_public.xlsx

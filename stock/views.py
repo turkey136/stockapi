@@ -1,10 +1,10 @@
 from django.http import JsonResponse
-from stock.models import Stock
-from stock.serializers import StockSerializer
+from stock.models import Stock, DailyStock
+from stock.serializers import StockSerializer, StockListSerializer
 
 def index(request):
     stocks=Stock.objects.all()
-    serializer=StockSerializer(stocks, many=True)
+    serializer=StockListSerializer(stocks, many=True)
     return JsonResponse(serializer.data, safe=False)
 
 def show(request, symbol):
@@ -14,12 +14,12 @@ def show(request, symbol):
       serializer=StockSerializer(stock[0], many=False)
       return JsonResponse(serializer.data, safe=False)
     else:
-      return not_found(symbol)
+      return __not_found(symbol)
   else:
     # 不正なティッカーシンボル
-    return not_found(symbol)
+    return __not_found(symbol)
 
-def not_found(symbol):
+def __not_found(symbol):
   return JsonResponse(
       status=404,
       data={ 'status':'false','message': 'not found Symbol {}'.format(symbol) }
