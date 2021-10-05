@@ -7,9 +7,21 @@ class Sector(models.Model):
   name = models.CharField(max_length = 50, db_index = True)
   updated_at = models.DateTimeField(auto_now = True)
 
+  class Meta:
+    unique_together = ('name',)
+
+  def __str__(self):
+    return '%s' % (self.name)
+
 class Market(models.Model):
   name = models.CharField(max_length = 50, db_index = True)
   updated_at = models.DateTimeField(auto_now = True)
+
+  class Meta:
+    unique_together = ('name',)
+
+  def __str__(self):
+    return '%s' % (self.name)
 
 class Stock(models.Model):
   sector = models.ForeignKey(Sector, on_delete = models.CASCADE, related_name = 'stocks')

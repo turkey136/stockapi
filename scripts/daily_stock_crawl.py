@@ -11,8 +11,7 @@ date_format = "%Y-%m-%d"
 five_day_ago = (datetime.today() - timedelta(days=6)).strftime(date_format)
 
 def run():
-  stocks = each_slice(Stock.objects.filter(), 200)
-  create_daily_stock(stocks[0])
+  stocks = each_slice(Stock.objects.filter(), 100)
   with Pool(processes=2) as p:
     p.map(func=create_daily_stock, iterable=stocks)
 
